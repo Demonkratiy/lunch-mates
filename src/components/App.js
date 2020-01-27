@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+//import './App.css';
+import styled from 'styled-components'
+import {  Container,
+  Divider,
+  Dropdown,
+  Grid,
+  Header,
+  Image,
+  List,
+  Menu,
+  Segment, } from 'semantic-ui-react'
+import HeaderMenu from './menu'
+import EventSingle from './eventSingle'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default class App extends Component {
+  state = {
+    data: [
+      {id: 1, placeName: 'Ginacvalle', placeAdress: 'Kayum Nasiry st., building 3', date: '08.02.2020', participants: [{id: 1, name:'Sir Artur'},{id: 2, name:'Princess Aurora'},{id: 3, name:'Mr. Smith'}]},
+      {id: 2, placeName: 'Ginacvalle', placeAdress: 'Kayum Nasiry st., building 3', date: '08.02.2020', participants: [{id: 1, name:'Sir Artur'},{id: 2, name:'Princess Aurora'}]},
+      {id: 3, placeName: 'Ginacvalle', placeAdress: 'Kayum Nasiry st., building 3', date: '08.02.2020', participants: [{id: 1, name:'Princess Aurora'}]},
+    ],
+  };
+
+
+  render() {
+    return (
+      <Container fluid>
+        <HeaderMenu />
+        <Container>
+          <EventSingle/>
+        </Container>
+      </Container>
+    )
+  }
+
 }
-
-export default App;
