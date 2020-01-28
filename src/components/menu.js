@@ -1,23 +1,29 @@
 import React, { Component } from 'react'
-import { Input, Menu, Segment, Image } from 'semantic-ui-react'
+import { Menu, Image } from 'semantic-ui-react'
 import styled from 'styled-components'
+
 
 let BrandName = styled(Menu.Item)`
 font-size: 20px;
 `
 
+// let CustomMenu = styled(Menu)'
+// color: #433b6b;
+// '
+
 export default class HeaderMenu extends Component {
-  state = { activeItem: 'home' }
+  state = { activeItem: 'view' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     const { activeItem } = this.state
+    const { userName, userPhoto } = this.props.userData
 
     return (
       <div>
         <Menu pointing color='violet' inverted fluid>
-          <BrandName Header >Lunch Mates 🍔</BrandName>
+          <BrandName header >Lunch Mates &nbsp;<span role="img" aria-label="hamburger">🍔</span></BrandName>
           <Menu.Item
             name='view'
             active={activeItem === 'view'}
@@ -35,8 +41,8 @@ export default class HeaderMenu extends Component {
           />
           <Menu.Menu position='right'>
             <Menu.Item>
-              <Image avatar src='https://react.semantic-ui.com/images/avatar/small/matthew.png' />
-              Have a nice lunch Sir Lancelot!
+              <Image avatar src={userPhoto} />
+              Have a nice lunch {userName}
             </Menu.Item>
           </Menu.Menu>
         </Menu>
