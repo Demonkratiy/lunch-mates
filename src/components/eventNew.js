@@ -12,9 +12,9 @@ import {  Form,
 
 class EventNewComponent extends React.Component {
   state = {
-    placeName: '',
-    eventDate: '',
-    placeAdress: '',
+    placeName: 'Test',
+    eventDate: 'test',
+    placeAdress: 'test',
     placeNameError: false,
     eventDateError: false,
     placeAdressError: false,
@@ -64,7 +64,7 @@ class EventNewComponent extends React.Component {
                 /*style={{onFocus:'this.type="date"' onBlur:'this.type="text"'}}*/
                 error={eventDateError}
                 error_name='eventDateError'
-                type='text'
+                type='date'
                 label='Date'
                 placeholder='dd-mm-yyyy'
                 width={6}
