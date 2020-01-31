@@ -18,7 +18,7 @@ export default class HeaderMenu extends Component {
 
   render() {
     const { activeItem } = this.state
-    const { userName, userPhoto } = this.props.userData
+    const { name, userPhoto } = this.props.userData
 
     return (
       <div>
@@ -42,7 +42,7 @@ export default class HeaderMenu extends Component {
           <Menu.Menu position='right'>
             <Menu.Item>
               <Image avatar src={userPhoto} />
-              Have a nice lunch {userName}
+              Have a nice lunch {name}
             </Menu.Item>
           </Menu.Menu>
         </Menu>
