@@ -7,7 +7,8 @@ import {  Form,
           Container,
           Header,
           Grid,
-          Transition, } from 'semantic-ui-react';
+          Transition,
+          Icon, } from 'semantic-ui-react';
 
 
 class EventNewComponent extends React.Component {
@@ -88,7 +89,13 @@ class EventNewComponent extends React.Component {
                   duration={500}
                   visible={visible}
               >
-                  <Button type='submit' color='blue' size='large'>Create this lunch event</Button>
+                  <Button animated='vertical' type='submit' color='blue' size='large'>
+                    <Button.Content visible>Create this lunch event</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name='calendar check' />
+                      Submit
+                    </Button.Content>
+                  </Button>
                 </Transition>
               </Grid.Column>
             </Grid>

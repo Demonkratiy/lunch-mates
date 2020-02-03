@@ -14,10 +14,10 @@ class LunchEvent {
 class Store {
   user = {id: 88, name: 'Sir Lancelot', userPhoto: 'https://react.semantic-ui.com/images/avatar/small/matthew.png', interestedThemes: ['History','IT','Books','Scince']};
   events = [
-    {id: 1, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', date: '08.02.2020', participants: [users[0],users[1],users[2],users[3],users[4],users[5]]},
-    {id: 2, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', date: '09.02.2020', participants: [users[6],users[7],users[1]]},
-    {id: 3, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', date: '10.02.2020', participants: [users[1],users[5],users[6],users[8]]},
-    {id: 4, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', date: '09.02.2020', participants: []},
+    {id: 1, eventCreator: users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', date: '08.02.2020', participants: [users[0],users[1],users[2],users[3],users[4],users[5]]},
+    {id: 2, eventCreator: users[6].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', date: '09.02.2020', participants: [users[6],users[7],users[1]]},
+    {id: 3, eventCreator: users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', date: '10.02.2020', participants: [users[1],users[5],users[6],users[8]]},
+    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', date: '09.02.2020', participants: []},
 ];
 
   getNewId(arr) {
@@ -46,11 +46,9 @@ class Store {
     }
   };
 
-
-
   addNewEvent(placeName, placeAdress, date) {
     const id = this.getNewId(this.events);
-    this.events.push({id: id, placeName: placeName, placeAdress: placeAdress, date: date, participants: [this.user]})
+    this.events.push({id: id, eventCreator: this.user.id, placeName: placeName, placeAdress: placeAdress, date: date, participants: [this.user]})
 
     // const id = this.getNewId(this.events);
     // const newEvent = new LunchEvent(id, placeName, placeAdress, date, [this.user])
@@ -59,6 +57,12 @@ class Store {
     // this.events.push(newEvent)
     // console.log(this.events)
   };
+
+  deleteEvent(eventId) {
+    const idForFiltering = eventId//no idea why I can't assign "eventId" directly inside of the filter
+    this.events = this.events.filter(event => event.id !== idForFiltering);
+  };
+
 }
 
 decorate(Store, {
