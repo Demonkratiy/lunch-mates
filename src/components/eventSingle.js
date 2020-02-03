@@ -9,12 +9,10 @@ import store from './store';
 class EventSingleComponent extends React.Component {
   state = { visible: true }
 
-  handleClick = (eventId, user,participants) => {
-    if (store.manageUserOnEvent(eventId, user) === false){
+  handleClick = (eventId, user, participants) => {
+    if (store.manageUserOnEvent(eventId) === false){
       this.setState((prevState) => ({ visible: !prevState.visible }))
     };
-    console.log(this.props.item.participants.length)
-
   };
 
   render() {
@@ -23,8 +21,6 @@ class EventSingleComponent extends React.Component {
     const { placeName, placeAdress, date, participants, id } = item;
     const { user } = store;
     const size = 'large';
-
-    console.log(participants)
 
     return (
       <Segment secondary size={size}>
@@ -63,7 +59,7 @@ class EventSingleComponent extends React.Component {
               onClick={() => {
                 this.handleClick(id, user,participants)
               }}
-              content={store.checkIfUserOnEvent(participants.map(p=>p.id), user) ? 'Leave this lunch' : 'Participate' }
+              content={store.checkIfUserOnEvent(participants.map(p=>p.id)) ? 'Leave this lunch' : 'Participate' }
             />
             </Transition>
           </List.Item>

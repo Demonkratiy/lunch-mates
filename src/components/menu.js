@@ -22,7 +22,7 @@ export default class HeaderMenu extends Component {
 
     return (
       <div>
-        <Menu pointing color='violet' inverted fluid>
+        <Menu style={{position: 'fixed', zIndex: 9999}} pointing color='violet' inverted fluid>
           <BrandName header >Lunch Mates &nbsp;<span role="img" aria-label="hamburger">🍔</span></BrandName>
           <Menu.Item
             name='view'

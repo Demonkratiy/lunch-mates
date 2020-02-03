@@ -11,12 +11,12 @@ import store from './store';
 
 class AppComponent extends Component {
   render() {
-    const { user, events } = store;
+    const { user } = store;
     return (
       <Container fluid>
         <HeaderMenu userData={user} />
         <Container>
-          <EventList eventData={events} userData={user}/>
+          <EventList />
         </Container>
         <EventNew />
       </Container>

@@ -28,23 +28,20 @@ class Store {
     }
   };
 
-  checkIfUserOnEvent(participantsID, user){
-    console.log(participantsID.find(pID => pID === user.id))
-    return participantsID.find(pID => pID === user.id);
+  checkIfUserOnEvent(participantsID){
+    return participantsID.find(pID => pID === this.user.id);
   };
 
-  manageUserOnEvent(eventId, user) {
+  manageUserOnEvent(eventId) {
     const idx = this.events.findIndex(item => item.id === eventId);
     const participantsID = this.events[idx].participants.map(p=>p.id);
-    console.log('called');
-    if (this.checkIfUserOnEvent(participantsID, user)) {
-      this.events[idx].participants = this.events[idx].participants.filter(p => p.id !== user.id);
+    if (this.checkIfUserOnEvent(participantsID)) {
+      this.events[idx].participants = this.events[idx].participants.filter(p => p.id !== this.user.id);
       //this.events[idx].participants.pop();
-
       return false;
     } else {
-      this.events[idx].participants.push(user);
-      console.log(toJS(this.events[idx].participants))
+      //this.events[idx].participants = [this.events[idx].participants, this.user];
+      this.events[idx].participants.push(this.user);
       return true;
     }
   };
@@ -53,11 +50,14 @@ class Store {
 
   addNewEvent(placeName, placeAdress, date) {
     const id = this.getNewId(this.events);
-    const newEvent = new LunchEvent(id, placeName, placeAdress, date, [this.user])
-    console.log(newEvent)
+    this.events.push({id: id, placeName: placeName, placeAdress: placeAdress, date: date, participants: [this.user]})
 
-    this.events.push(newEvent)
-    console.log(this.events)
+    // const id = this.getNewId(this.events);
+    // const newEvent = new LunchEvent(id, placeName, placeAdress, date, [this.user])
+    // console.log(newEvent)
+    //
+    // this.events.push(newEvent)
+    // console.log(this.events)
   };
 }
 
