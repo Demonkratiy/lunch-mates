@@ -14,7 +14,7 @@ import {  Form,
 class EventNewComponent extends React.Component {
   state = {
     placeName: 'Test',
-    eventDate: 'test',
+    eventDate: '',
     placeAdress: 'test',
     placeNameError: false,
     eventDateError: false,
@@ -25,7 +25,7 @@ class EventNewComponent extends React.Component {
   handleChange = (e, { name, value, error_name }) => this.setState({ [name]: value, [error_name]: false })
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();//прерывает отправку формы и следовательно не перезагружает страницу
     if (this.state.placeName === '' || this.state.eventDate === '' || this.state.placeAdress === '') {
       if (this.state.placeName === '') {
         this.setState({ placeNameError: 'Please enter the name of the place' })

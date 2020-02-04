@@ -17,7 +17,7 @@ class Store {
     {id: 1, eventCreator: users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', date: '08.02.2020', participants: [users[0],users[1],users[2],users[3],users[4],users[5]]},
     {id: 2, eventCreator: users[6].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', date: '09.02.2020', participants: [users[6],users[7],users[1]]},
     {id: 3, eventCreator: users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', date: '10.02.2020', participants: [users[1],users[5],users[6],users[8]]},
-    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', date: '09.02.2020', participants: []},
+    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', date: '2020-02-04', participants: []},
 ];
 
   getNewId(arr) {
@@ -57,6 +57,14 @@ class Store {
     // this.events.push(newEvent)
     // console.log(this.events)
   };
+
+  editEvent(eventID, placeName, placeAdress, eventDate) {
+    const currentEvent = this.events.find(event => event.id === eventID);
+    const idx = this.events.findIndex(event => event.id === eventID);
+    this.events[idx].placeName = placeName;
+    this.events[idx].placeAdress = placeAdress;
+    this.events[idx].eventDate = eventDate;
+  }
 
   deleteEvent(eventId) {
     const idForFiltering = eventId//no idea why I can't assign "eventId" directly inside of the filter

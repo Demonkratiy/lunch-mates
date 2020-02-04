@@ -1,8 +1,9 @@
 import React from 'react'
-import { Segment, Label, Button, List, Image, Transition } from 'semantic-ui-react'
+import { Segment, Label, Button, List, Image, Transition, Input } from 'semantic-ui-react'
 import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import store from './store';
+import ModalToEditEvent from './modalToEditEvent'
 //import styled from 'styled-components'
 
 
@@ -28,8 +29,12 @@ class EventSingleComponent extends React.Component {
 
     return (
       <Segment secondary size={size}>
+        {eventCreator === user.id ? <ModalToEditEvent eventID={id}/> : '' }
+
+
         <List>
           <List.Item key='eventFieldID_1'><List.Header><h3>{placeName}</h3></List.Header></List.Item>
+
           <List.Item key='eventFieldID_2'>{placeAdress}</List.Item>
           <List.Item key='eventFieldID_3'>{date}</List.Item>
           <List.Item key='eventFieldID_4'><h3 style={{color:'#2185d0'}}>Participants <Label color='blue' circular>{participants.length}</Label></h3></List.Item>
@@ -59,6 +64,7 @@ class EventSingleComponent extends React.Component {
             >
             <Button.Group>
             <Button
+              icon={store.checkIfUserOnEvent(participants.map(p=>p.id)) ? 'user times' : 'user plus' }
               color={store.checkIfUserOnEvent(participants.map(p=>p.id)) ? 'grey' : 'blue' }
               size='large'
               onClick={() => {
@@ -70,6 +76,7 @@ class EventSingleComponent extends React.Component {
               <Button.Or /> : ''}
             {eventCreator === user.id ?
               <Button
+              icon='trash alternate'
                 color='google plus'
                 size='large'
                 onClick={() => {
