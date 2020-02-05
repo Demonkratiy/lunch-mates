@@ -3,23 +3,26 @@ import React, { Component } from 'react';
 //import styled from 'styled-components'
 import {  Container } from 'semantic-ui-react'
 import { observer } from 'mobx-react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import store from './store';
 import HeaderMenu from './menu'
 import EventList from './eventList'
 import EventNew from'./eventNew'
-import store from './store';
 
 
 class AppComponent extends Component {
   render() {
-    const { user } = store;
+
     return (
-      <Container fluid>
-        <HeaderMenu userData={user} />
-        <Container>
-          <EventList />
+      <Router>
+        <HeaderMenu />
+        <Container fluid style={{paddingBottom:'40px', paddingTop: '65px'}}>
+          <Route path='/view/' render={(props) => <EventList events={store.getEvents().futureEvents} />} />
+          <Route path='/schedule_new/' component={EventNew} />
+          <Route path='/participations_history/' render={(props) => <EventList events={store.getEvents().historyEvents} />} />
         </Container>
-        <EventNew />
-      </Container>
+      </Router>
     )
   }
 }

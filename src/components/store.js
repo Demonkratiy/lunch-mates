@@ -2,11 +2,11 @@ import { decorate, observable, action, toJS } from 'mobx';
 import users from './mock/users';
 
 class LunchEvent {
-  constructor(id, placeName, placeAdress, date, participants) {
+  constructor(id, placeName, placeAdress, eventDate, participants) {
     this.id = id;
     this.placeName = placeName;
     this.placeAdress = placeAdress;
-    this.date = date;
+    this.eventDate = eventDate;
     this.participants = participants;
   }
 }
@@ -14,11 +14,27 @@ class LunchEvent {
 class Store {
   user = {id: 88, name: 'Sir Lancelot', userPhoto: 'https://react.semantic-ui.com/images/avatar/small/matthew.png', interestedThemes: ['History','IT','Books','Scince']};
   events = [
-    {id: 1, eventCreator: users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', date: '08.02.2020', participants: [users[0],users[1],users[2],users[3],users[4],users[5]]},
-    {id: 2, eventCreator: users[6].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', date: '09.02.2020', participants: [users[6],users[7],users[1]]},
-    {id: 3, eventCreator: users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', date: '10.02.2020', participants: [users[1],users[5],users[6],users[8]]},
-    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', date: '2020-02-04', participants: []},
+    {id: 1, eventCreator: users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', eventDate: '2020-02-28', participants: [users[0],users[1],users[2],users[3],users[4],users[5]]},
+    {id: 2, eventCreator: users[6].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-01-24', participants: [users[6],users[7],users[1]]},
+    {id: 3, eventCreator: users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', eventDate: '2020-02-24', participants: [users[1],users[5],users[6],users[8]]},
+    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: []},
 ];
+
+  getEvents(){
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = now.getMonth()+1;
+    const d = now.getDate();
+    const nowString = y+'-'+m+'-'+d;
+    const futureEvents = this.events.filter(event => new Date(event.eventDate).getTime() >= new Date(nowString).getTime());
+    const historyEvents = this.events.filter(event => new Date(event.eventDate).getTime() < new Date(nowString).getTime() && event.eventCreator === this.user.id);
+    return (
+      {
+        futureEvents: futureEvents,
+        historyEvents: historyEvents,
+      }
+    )
+  }
 
   getNewId(arr) {
     if (arr.length > 0) {
@@ -46,12 +62,12 @@ class Store {
     }
   };
 
-  addNewEvent(placeName, placeAdress, date) {
+  addNewEvent(placeName, placeAdress, eventDate) {
     const id = this.getNewId(this.events);
-    this.events.push({id: id, eventCreator: this.user.id, placeName: placeName, placeAdress: placeAdress, date: date, participants: [this.user]})
+    this.events.push({id: id, eventCreator: this.user.id, placeName: placeName, placeAdress: placeAdress, eventDate: eventDate, participants: [this.user]})
 
     // const id = this.getNewId(this.events);
-    // const newEvent = new LunchEvent(id, placeName, placeAdress, date, [this.user])
+    // const newEvent = new LunchEvent(id, placeName, placeAdress, eventDate, [this.user])
     // console.log(newEvent)
     //
     // this.events.push(newEvent)
@@ -78,6 +94,9 @@ decorate(Store, {
   events: observable,
   manageUserOnEvent: action,
   addNewEvent: action,
+  editEvent: action,
+  deleteEvent: action,
+  getEvents: action,
 });
 
 const store = new Store();

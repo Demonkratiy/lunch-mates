@@ -96,9 +96,11 @@ class ModalToEditEventComponent extends React.Component {
             <Button.Content visible><Icon name='times' />Don't save changes</Button.Content>
             <Button.Content hidden><Icon name='reply' />Leave as it was</Button.Content>
           </Button>
-          <Button color='green' onClick={() => this.handleEditEvent(eventID)} inverted>
-            <Icon name='checkmark' /> Save changes
+          <Button color='green' onClick={() => this.handleEditEvent(eventID)} inverted animated>
+            <Button.Content visible><Icon name='checkmark' /> Save changes</Button.Content>
+            <Button.Content hidden><Icon name='arrow right' />Submit changes</Button.Content>
           </Button>
+
         </Modal.Actions>
       </Modal>
     )

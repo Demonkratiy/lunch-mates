@@ -18,12 +18,13 @@ class EventSingleComponent extends React.Component {
 
   deleteEventOnClick = (eventId) => {
     store.deleteEvent(eventId);
+    store.getEvents();
   };
 
   render() {
     const { visible } = this.state
     const { item } = this.props;
-    const { placeName, placeAdress, date, participants, id, eventCreator } = item;
+    const { placeName, placeAdress, eventDate, participants, id, eventCreator } = item;
     const { user } = store;
     const size = 'large';
 
@@ -36,7 +37,7 @@ class EventSingleComponent extends React.Component {
           <List.Item key='eventFieldID_1'><List.Header><h3>{placeName}</h3></List.Header></List.Item>
 
           <List.Item key='eventFieldID_2'>{placeAdress}</List.Item>
-          <List.Item key='eventFieldID_3'>{date}</List.Item>
+          <List.Item key='eventFieldID_3'>{new Date(eventDate).toLocaleDateString()}</List.Item>
           <List.Item key='eventFieldID_4'><h3 style={{color:'#2185d0'}}>Participants <Label color='blue' circular>{participants.length}</Label></h3></List.Item>
             {participants.length !== 0 ?
               <Segment size={size}>

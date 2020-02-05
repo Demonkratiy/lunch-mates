@@ -46,7 +46,7 @@ class EventNewComponent extends React.Component {
   render() {
     const { placeName, eventDate, placeAdress, placeNameError, eventDateError, placeAdressError, visible } = this.state;
     return(
-      <Container style={{paddingTop: '20px', paddingBottom: '40px'}}>
+      <Container>
         <Segment secondary>
           <Header style={{paddingTop: '20px', color: '#2185d0'}} as='h3' icon='food' content='Create a new event' subheader='With great lunch mates ;)'/>
           <Container style={{padding: '10px 40px 20px 40px'}}>
