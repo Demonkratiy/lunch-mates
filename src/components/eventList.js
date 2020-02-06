@@ -7,7 +7,9 @@ import { toJS } from 'mobx'
 
 class EventListComponent extends React.Component{
   render() {
-    const { events } = this.props;
+    const isFuture = this.props.match.path.includes('view')
+    const { futureEvents, historyEvents } = store.getEvents;
+    const events = isFuture ? futureEvents : historyEvents;
     return(
       <Container>
         <List>
@@ -15,7 +17,7 @@ class EventListComponent extends React.Component{
             const { id } = item;
             return(
               <List.Item key={id}>
-                <EventSingle item={item}/>
+                <EventSingle item={item} isFuture={isFuture} />
               </List.Item>
             );
           })}

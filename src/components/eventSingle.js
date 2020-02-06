@@ -18,19 +18,18 @@ class EventSingleComponent extends React.Component {
 
   deleteEventOnClick = (eventId) => {
     store.deleteEvent(eventId);
-    store.getEvents();
   };
 
   render() {
     const { visible } = this.state
-    const { item } = this.props;
+    const { item, isFuture } = this.props;
     const { placeName, placeAdress, eventDate, participants, id, eventCreator } = item;
     const { user } = store;
     const size = 'large';
 
     return (
       <Segment secondary size={size}>
-        {eventCreator === user.id ? <ModalToEditEvent eventID={id}/> : '' }
+        {eventCreator !== user.id ? '' : isFuture ? <ModalToEditEvent eventID={id}/> : '' }
 
 
         <List>
@@ -64,16 +63,17 @@ class EventSingleComponent extends React.Component {
                 visible={visible}
             >
             <Button.Group>
-            <Button
-              icon={store.checkIfUserOnEvent(participants.map(p=>p.id)) ? 'user times' : 'user plus' }
-              color={store.checkIfUserOnEvent(participants.map(p=>p.id)) ? 'grey' : 'blue' }
-              size='large'
-              onClick={() => {
-                this.handleClick(id, user)
-              }}
-              content={store.checkIfUserOnEvent(participants.map(p=>p.id)) ? 'Leave this lunch' : 'Participate' }
-            />
-            {eventCreator === user.id ?
+              {!isFuture ? '' :
+              <Button
+                icon={store.checkIfUserOnEvent(participants.map(p=>p.id)) ? 'user times' : 'user plus' }
+                color={store.checkIfUserOnEvent(participants.map(p=>p.id)) ? 'grey' : 'blue' }
+                size='large'
+                onClick={() => {
+                  this.handleClick(id, user)
+                }}
+                content={store.checkIfUserOnEvent(participants.map(p=>p.id)) ? 'Leave this lunch' : 'Participate' }
+              />}
+            {eventCreator !== user.id ? '' : isFuture ?
               <Button.Or /> : ''}
             {eventCreator === user.id ?
               <Button

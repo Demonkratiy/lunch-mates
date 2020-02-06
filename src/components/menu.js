@@ -15,7 +15,7 @@ font-size: 20px;
 // '
 
 class HeaderMenuComponent extends Component {
-  state = { activeItem: 'view' }
+  state = { activeItem: '' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 //import styled from 'styled-components'
 import {  Container } from 'semantic-ui-react'
 import { observer } from 'mobx-react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 import store from './store';
 import HeaderMenu from './menu'
@@ -18,9 +18,10 @@ class AppComponent extends Component {
       <Router>
         <HeaderMenu />
         <Container fluid style={{paddingBottom:'40px', paddingTop: '65px'}}>
-          <Route path='/view/' render={(props) => <EventList events={store.getEvents().futureEvents} />} />
+          <Redirect from='/' to='/view' />
+          <Route path='/view/' component={EventList} />
           <Route path='/schedule_new/' component={EventNew} />
-          <Route path='/participations_history/' render={(props) => <EventList events={store.getEvents().historyEvents} />} />
+          <Route path='/participations_history/' component={EventList} />
         </Container>
       </Router>
     )

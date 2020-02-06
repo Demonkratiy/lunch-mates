@@ -1,4 +1,4 @@
-import { decorate, observable, action, toJS } from 'mobx';
+import { decorate, observable, action, computed, toJS } from 'mobx';
 import users from './mock/users';
 
 class LunchEvent {
@@ -17,23 +17,22 @@ class Store {
     {id: 1, eventCreator: users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', eventDate: '2020-02-28', participants: [users[0],users[1],users[2],users[3],users[4],users[5]]},
     {id: 2, eventCreator: users[6].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-01-24', participants: [users[6],users[7],users[1]]},
     {id: 3, eventCreator: users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', eventDate: '2020-02-24', participants: [users[1],users[5],users[6],users[8]]},
-    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: []},
+    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [users[9],users[1],users[5],users[6]]},
 ];
 
-  getEvents(){
+  get getEvents(){
     const now = new Date();
     const y = now.getFullYear();
     const m = now.getMonth()+1;
     const d = now.getDate();
     const nowString = y+'-'+m+'-'+d;
     const futureEvents = this.events.filter(event => new Date(event.eventDate).getTime() >= new Date(nowString).getTime());
-    const historyEvents = this.events.filter(event => new Date(event.eventDate).getTime() < new Date(nowString).getTime() && event.eventCreator === this.user.id);
-    return (
-      {
+    const historyEvents = this.events.filter(event => new Date(event.eventDate).getTime() < new Date(nowString).getTime() && event.participants.find(p => p.id === this.user.id));
+    return {
         futureEvents: futureEvents,
         historyEvents: historyEvents,
-      }
-    )
+    }
+
   }
 
   getNewId(arr) {
@@ -96,7 +95,7 @@ decorate(Store, {
   addNewEvent: action,
   editEvent: action,
   deleteEvent: action,
-  getEvents: action,
+  getEvents: computed,
 });
 
 const store = new Store();

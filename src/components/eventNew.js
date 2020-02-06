@@ -8,7 +8,8 @@ import {  Form,
           Header,
           Grid,
           Transition,
-          Icon, } from 'semantic-ui-react';
+          Icon,
+          Message, } from 'semantic-ui-react';
 
 
 class EventNewComponent extends React.Component {
@@ -19,7 +20,8 @@ class EventNewComponent extends React.Component {
     placeNameError: false,
     eventDateError: false,
     placeAdressError: false,
-    visible: true
+    visible: true,
+    success: false,
   }
 
   handleChange = (e, { name, value, error_name }) => this.setState({ [name]: value, [error_name]: false })
@@ -39,18 +41,24 @@ class EventNewComponent extends React.Component {
       this.setState((prevState) => ({ visible: !prevState.visible }))
     } else {
       store.addNewEvent(this.state.placeName, this.state.placeAdress, this.state.eventDate);
-      this.setState({ placeName: '', eventDate: '', placeAdress: '', })
+      this.setState({ placeName: '', eventDate: '', placeAdress: '', success: true});
+      setTimeout(() => this.setState({success: false}), 4000);
     }
   }
 
   render() {
-    const { placeName, eventDate, placeAdress, placeNameError, eventDateError, placeAdressError, visible } = this.state;
+    const { placeName, eventDate, placeAdress, placeNameError, eventDateError, placeAdressError, visible, success } = this.state;
     return(
       <Container>
-        <Segment secondary>
+        <Segment onClick={()=>this.setState({success: false})} secondary>
           <Header style={{paddingTop: '20px', color: '#2185d0'}} as='h3' icon='food' content='Create a new event' subheader='With great lunch mates ;)'/>
           <Container style={{padding: '10px 40px 20px 40px'}}>
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit} success={success}>
+          <Message
+    success
+    header='Lunch event created successfully!'
+    content='Soon great mates will join you there! ;)'
+  />
             <Form.Group>
               <Form.Input
                 error={placeNameError}
@@ -90,7 +98,7 @@ class EventNewComponent extends React.Component {
                   visible={visible}
               >
                   <Button animated='vertical' type='submit' color='blue' size='large'>
-                    <Button.Content visible>Create this lunch event</Button.Content>
+                    <Button.Content visible>Schedule this lunch event</Button.Content>
                     <Button.Content hidden>
                       <Icon name='calendar check' />
                       Submit
