@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { toJS } from 'mobx';
 import store from './store';
 import ModalToEditEvent from './modalToEditEvent'
+import ParticipantsAccordion from './participantsAccordion'
 //import styled from 'styled-components'
 
 
@@ -39,25 +40,8 @@ class EventSingleComponent extends React.Component {
           <List.Item key='eventFieldID_1'><List.Header><h3>{placeName}</h3></List.Header></List.Item>
           <List.Item key='eventFieldID_2'>{placeAdress}</List.Item>
           <List.Item key='eventFieldID_3'>{new Date(eventDate).toLocaleDateString()}</List.Item>
-          <List.Item key='eventFieldID_4'><h3 style={{color:'#2185d0'}}>Participants <Label color='blue' circular>{participants.length}</Label></h3></List.Item>
-            {participants.length !== 0 ?
-              <Segment size={size}>
-                <List divided selection verticalAlign='middle' animated>
-                  {participants.map((el) => {
-                    const {id, ...elProps} = el;
-                    return(
-                      <List.Item key={id}>
-                        <Image avatar src={elProps.userPhoto} />
-                        <List.Content>
-                          <List.Header>{elProps.name}</List.Header>
-                          {elProps.interestedThemes.map((theme)=>` ${theme}`).toString()}
-                        </List.Content>
-                      </List.Item>
-                    )
-                  })}
-                </List>
-              </Segment>
-            : ''}
+          <List.Item key='eventFieldID_4'><ParticipantsAccordion item={item} /></List.Item>
+          
           <List.Item key='eventFieldID_5'>
             <Transition
                 animation='jiggle'
