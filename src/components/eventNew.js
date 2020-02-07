@@ -1,6 +1,7 @@
 import React from 'react';
 import store from './store';
 import { observer } from 'mobx-react';
+import { Link } from 'react-router-dom'
 import {  Form,
           Segment,
           Button,
@@ -22,6 +23,7 @@ class EventNewComponent extends React.Component {
     placeAdressError: false,
     visible: true,
     success: false,
+    newEventCreated: false,
   }
 
   handleChange = (e, { name, value, error_name }) => this.setState({ [name]: value, [error_name]: false })
@@ -41,13 +43,13 @@ class EventNewComponent extends React.Component {
       this.setState((prevState) => ({ visible: !prevState.visible }))
     } else {
       store.addNewEvent(this.state.placeName, this.state.placeAdress, this.state.eventDate);
-      this.setState({ placeName: '', eventDate: '', placeAdress: '', success: true});
+      this.setState({ placeName: '', eventDate: '', placeAdress: '', success: true, newEventCreated: true});
       setTimeout(() => this.setState({success: false}), 4000);
     }
   }
 
   render() {
-    const { placeName, eventDate, placeAdress, placeNameError, eventDateError, placeAdressError, visible, success } = this.state;
+    const { placeName, eventDate, placeAdress, placeNameError, eventDateError, placeAdressError, visible, success, newEventCreated } = this.state;
     return(
       <Container>
         <Segment onClick={()=>this.setState({success: false})} secondary>
@@ -92,19 +94,29 @@ class EventNewComponent extends React.Component {
               onChange={this.handleChange} />
             <Grid>
               <Grid.Column textAlign="center" style={{paddingTop: '40px'}}>
+              {newEventCreated ?
+                <Button as={Link} to='/view' onClick={() => store.setMenuStateActiveItem('view')} animated color='violet' size='large'>
+                  <Button.Content visible>Go to lunch events view</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name='eye' />
+                    View events
+                  </Button.Content>
+                </Button>
+              : ''}
               <Transition
                   animation='shake'
                   duration={500}
                   visible={visible}
               >
                   <Button animated='vertical' type='submit' color='blue' size='large'>
-                    <Button.Content visible>Schedule this lunch event</Button.Content>
+                    <Button.Content visible>Schedule new lunch event</Button.Content>
                     <Button.Content hidden>
                       <Icon name='calendar check' />
                       Submit
                     </Button.Content>
                   </Button>
-                </Transition>
+              </Transition>
+
               </Grid.Column>
             </Grid>
           </Form>

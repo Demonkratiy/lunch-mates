@@ -17,8 +17,16 @@ class Store {
     {id: 1, eventCreator: users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', eventDate: '2020-02-28', participants: [users[0],users[1],users[2],users[3],users[4],users[5]]},
     {id: 2, eventCreator: users[6].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-01-24', participants: [users[6],users[7],users[1]]},
     {id: 3, eventCreator: users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', eventDate: '2020-02-24', participants: [users[1],users[5],users[6],users[8]]},
-    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [users[9],users[1],users[5],users[6]]},
-];
+    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-04-01', participants: [users[9],users[1],users[5],users[6]]},
+    {id: 5, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [users[9],users[1],users[5],users[6]]},
+  ];
+  menuState = {
+    activeItem: 'view',
+  };
+
+  setMenuStateActiveItem(name) {
+    this.menuState.activeItem = name
+  }
 
   get getEvents(){
     const now = new Date();
@@ -91,11 +99,13 @@ class Store {
 decorate(Store, {
   user: observable,
   events: observable,
+  menuState: observable,
   manageUserOnEvent: action,
   addNewEvent: action,
   editEvent: action,
   deleteEvent: action,
   getEvents: computed,
+  setMenuActiveTab: action
 });
 
 const store = new Store();
