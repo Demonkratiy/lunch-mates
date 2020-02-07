@@ -83,7 +83,6 @@ class Store {
   };
 
   editEvent(eventID, placeName, placeAdress, eventDate) {
-    const currentEvent = this.events.find(event => event.id === eventID);
     const idx = this.events.findIndex(event => event.id === eventID);
     this.events[idx].placeName = placeName;
     this.events[idx].placeAdress = placeAdress;

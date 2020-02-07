@@ -1,11 +1,10 @@
 import React from 'react'
-import { Segment, Label, Button, List, Image, Transition, Input, Responsive } from 'semantic-ui-react'
+import { Segment, Button, List, Transition, Responsive } from 'semantic-ui-react'
 import { observer } from 'mobx-react';
-import { toJS } from 'mobx';
+
 import store from './store';
 import ModalToEditEvent from './modalToEditEvent'
 import ParticipantsAccordion from './participantsAccordion'
-//import styled from 'styled-components'
 
 
 class EventSingleComponent extends React.Component {
@@ -41,7 +40,7 @@ class EventSingleComponent extends React.Component {
           <List.Item key='eventFieldID_2'>{placeAdress}</List.Item>
           <List.Item key='eventFieldID_3'>{new Date(eventDate).toLocaleDateString()}</List.Item>
           <List.Item key='eventFieldID_4'><ParticipantsAccordion item={item} /></List.Item>
-          
+
           <List.Item key='eventFieldID_5'>
             <Transition
                 animation='jiggle'

@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import { Menu, Image, Dropdown, Responsive } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { observer } from 'mobx-react';
-import styled from 'styled-components'
 import store from './store'
-
-
 
 
 class HeaderMenuComponent extends Component {

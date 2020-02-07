@@ -1,9 +1,9 @@
 import React from 'react'
 import EventSingle from './eventSingle'
-import { List, Container } from 'semantic-ui-react'
+import { List,
+         Container } from 'semantic-ui-react'
 import { observer } from 'mobx-react';
 import store from './store';
-import { toJS } from 'mobx'
 
 class EventListComponent extends React.Component{
   render() {

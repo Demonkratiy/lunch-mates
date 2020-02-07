@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-//import './App.css';
-//import styled from 'styled-components'
 import {  Container } from 'semantic-ui-react'
 import { observer } from 'mobx-react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
-import store from './store';
 import HeaderMenu from './menu'
 import EventList from './eventList'
 import EventNew from'./eventNew'
@@ -13,7 +10,6 @@ import EventNew from'./eventNew'
 
 class AppComponent extends Component {
   render() {
-
     return (
       <Router>
         <HeaderMenu />
