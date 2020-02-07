@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, List, Label, Segment, Image, Icon } from 'semantic-ui-react'
+import { Accordion, List, Label, Segment, Image, Icon, Transition } from 'semantic-ui-react'
 
 
 export default class ParticipantsAccordion extends React.Component {
@@ -31,7 +31,7 @@ export default class ParticipantsAccordion extends React.Component {
         <Accordion.Content  active={activeIndex === 0}>
           {participants.length !== 0 ?
             <Segment size='large' style={{marginBottom: '15px'}} >
-              <List divided selection verticalAlign='middle' animated>
+              <Transition.Group as={List} animation='scale' duration={400} divided selection verticalAlign='middle' animated>
                 {participants.map((el) => {
                   const {id, ...elProps} = el;
                   return(
@@ -44,7 +44,7 @@ export default class ParticipantsAccordion extends React.Component {
                     </List.Item>
                   )
                 })}
-              </List>
+              </Transition.Group>
             </Segment>
           :
             <Segment size='large' style={{marginBottom: '15px'}} content='There is no any participants yet. Wanna be first? 😉' />}

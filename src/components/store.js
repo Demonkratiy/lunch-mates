@@ -19,7 +19,7 @@ class Store {
     {id: 3, eventCreator: users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', eventDate: '2020-02-24', participants: [users[1],users[5],users[6],users[8]]},
     {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-04-01', participants: [users[9],users[1],users[5],users[6]]},
     {id: 5, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [users[9],users[1],users[5],users[6]]},
-    {id: 5, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-11', participants: []},
+    {id: 6, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-11', participants: []},
   ];
   menuState = {
     activeItem: 'view',
