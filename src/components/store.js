@@ -13,14 +13,17 @@ class LunchEvent {
 
 class Store {
   user = {id: 88, name: 'Sir Lancelot', userPhoto: 'https://react.semantic-ui.com/images/avatar/small/matthew.png', interestedThemes: ['History','IT','Books','Scince']};
+  users = users;
   events = [
-    {id: 1, eventCreator: users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', eventDate: '2020-02-28', participants: [users[0],users[1],users[2],users[3],users[4],users[5]]},
-    {id: 2, eventCreator: users[6].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-01-24', participants: [users[6],users[7],users[1]]},
-    {id: 3, eventCreator: users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', eventDate: '2020-02-24', participants: [users[1],users[5],users[6],users[8]]},
-    {id: 4, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-04-01', participants: [users[9],users[1],users[5],users[6]]},
-    {id: 5, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [users[9],users[1],users[5],users[6]]},
-    {id: 6, eventCreator: users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-11', participants: []},
+    {id: 1, eventCreator: this.users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', eventDate: '2020-02-28', participants: [this.users[0],this.users[1],this.users[2],this.users[3],this.users[4],this.users[5]]},
+    {id: 2, eventCreator: this.users[6].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-01-24', participants: [this.users[6],this.users[7],this.users[1]]},
+    {id: 3, eventCreator: this.users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', eventDate: '2020-02-24', participants: [this.users[1],this.users[5],this.users[6],this.users[8]]},
+    {id: 4, eventCreator: this.users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-04-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
+    {id: 5, eventCreator: this.users[9].id, placeName: 'Michelin star - Created by Me', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
+    {id: 6, eventCreator: this.users[5].id, placeName: 'Michelin star - Created by Someone else', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
+    {id: 7, eventCreator: this.users[9].id, placeName: 'Michelin Red Star', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-11', participants: []},
   ];
+
   menuState = {
     activeItem: 'view',
   };
@@ -29,14 +32,30 @@ class Store {
     this.menuState.activeItem = name
   }
 
+  addFollower(toFollowID) {
+    const idx = this.users.findIndex(user => user.id === toFollowID);
+
+    this.users[idx].followers.push(this.user);
+    console.log(this.users[idx].followers)
+  }
+
   get getEvents(){
     const now = new Date();
     const y = now.getFullYear();
     const m = now.getMonth()+1;
     const d = now.getDate();
     const nowString = y+'-'+m+'-'+d;
-    const futureEvents = this.events.filter(event => new Date(event.eventDate).getTime() >= new Date(nowString).getTime());
-    const historyEvents = this.events.filter(event => new Date(event.eventDate).getTime() < new Date(nowString).getTime() && event.participants.find(p => p.id === this.user.id));
+    const sortedByDate = this.events.slice().sort((a,b) => {
+      if (new Date(a.eventDate) > new Date(b.eventDate)) {
+        return 1;
+      }
+      if (new Date(a.eventDate) < new Date(b.eventDate)) {
+        return -1;
+      }
+      return 0;
+    })
+    const futureEvents = sortedByDate.filter(event => new Date(event.eventDate).getTime() >= new Date(nowString).getTime());
+    const historyEvents = sortedByDate.filter(event => new Date(event.eventDate).getTime() < new Date(nowString).getTime() && event.participants.find(p => p.id === this.user.id));
     return {
         futureEvents: futureEvents,
         historyEvents: historyEvents,
@@ -105,7 +124,8 @@ decorate(Store, {
   editEvent: action,
   deleteEvent: action,
   getEvents: computed,
-  setMenuActiveTab: action
+  setMenuActiveTab: action,
+  addFollower: action
 });
 
 const store = new Store();

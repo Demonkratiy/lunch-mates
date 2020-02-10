@@ -1,29 +1,60 @@
-import React from 'react'
-import { Accordion, List, Label, Segment, Image, Icon, Transition } from 'semantic-ui-react'
+import React from 'react';
+import { Accordion, List, Label, Segment, Image, Icon, Transition, Modal, Button, Header } from 'semantic-ui-react';
 import store from './store';
 
 export default class ParticipantsAccordion extends React.Component {
-  state = { activeIndex: '' }
+  state = { activeIndex: '',
+            showFollowModal: false,
+            clickedParticipant: ''
+          }
 
   handleClickAccordion = (e, titleProps) => {
-    const { index } = titleProps
-    const { activeIndex } = this.state
-    const newIndex = activeIndex === index ? -1 : index
+    const { index } = titleProps;
+    const { activeIndex } = this.state;
+    const newIndex = activeIndex === index ? -1 : index;
 
-    this.setState({ activeIndex: newIndex })
+    this.setState({ activeIndex: newIndex });
   }
 
   handleClickParticipate = (eventID) => {
-    store.manageUserOnEvent(eventID)
+    store.manageUserOnEvent(eventID);
   }
 
+  handleFollowModalOpen = (el) => this.setState({ showFollowModal: true, clickedParticipant: el });
+  handleFollowModalClose = () => this.setState({ showFollowModal: false });
+  handleFollowModalFollow = (toFollowID) => {
+    store.addFollower(toFollowID);
+    this.setState({ showFollowModal: false });
+  };
+
   render() {
-    const { activeIndex } = this.state
+    const { activeIndex, showFollowModal, clickedParticipant } = this.state
     const { item } = this.props
     const { participants, id } = item;
 
     return (
       <Accordion>
+
+      <Modal
+        open={showFollowModal}
+        onClose={this.handleFollowModalClose}
+      >
+        <Header icon='group' content={clickedParticipant.name} />
+          <Modal.Content>
+            <h3>Do you want to follow</h3>
+          </Modal.Content>
+        <Modal.Actions>
+            <Button onClick={this.handleFollowModalClose} color='red' inverted animated='fade'>
+              <Button.Content visible><Icon name='times' />No</Button.Content>
+              <Button.Content hidden><Icon name='reply' />No</Button.Content>
+            </Button>
+            <Button color='green' onClick={() => this.handleFollowModalFollow(clickedParticipant.id)} inverted animated>
+              <Button.Content visible><Icon name='checkmark' />Yes</Button.Content>
+              <Button.Content hidden><Icon name='arrow right' />Yes</Button.Content>
+            </Button>
+        </Modal.Actions>
+      </Modal>
+
         <Accordion.Title
           active={activeIndex === 0}
           index={0}
@@ -39,7 +70,8 @@ export default class ParticipantsAccordion extends React.Component {
                   const {id, ...elProps} = el;
 
                   return(
-                    <List.Item key={id} onClick={() => alert('Hi '+elProps.name)}>
+                    <List.Item key={id} onClick={() => this.handleFollowModalOpen(el)}>
+
                       <Image avatar src={elProps.userPhoto} />
                       <List.Content>
                         <List.Header>{elProps.name}</List.Header>
@@ -58,4 +90,4 @@ export default class ParticipantsAccordion extends React.Component {
     )
   }
 
-}
+};

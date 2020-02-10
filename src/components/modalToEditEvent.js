@@ -52,27 +52,26 @@ class ModalToEditEventComponent extends React.Component {
         closeOnDimmerClick={false}
         basic
         size='small'
-
       >
         <Header icon='pencil alternate' content='Edit this lunch event' />
           <Modal.Content>
             <h3>Edit name of the place</h3>
             <Input
               fluid
-              placeholder={placeNameError}
+              placeholder={placeNameError ? placeNameError : ''}
               name='placeName'
               value={placeName}
-              error={placeNameError}
+              error={placeNameError ? true : false }
               error_name='placeNameError'
               onChange={this.handleInputChange}
             />
             <h3>Edit it's adress</h3>
             <Input
               fluid
-              placeholder={placeAdressError}
+              placeholder={placeAdressError ? placeAdressError : ''}
               name='placeAdress'
               value={placeAdress}
-              error={placeAdressError}
+              error={placeAdressError ? true : false }
               error_name='placeAdressError'
               onChange={this.handleInputChange}
             />
@@ -82,7 +81,7 @@ class ModalToEditEventComponent extends React.Component {
               type='date'
               name='eventDate'
               value={eventDate}
-              error={eventDateError}
+              error={eventDateError ? true : false }
               error_name='eventDateError'
               onChange={this.handleInputChange}
             />

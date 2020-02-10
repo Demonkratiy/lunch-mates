@@ -20,8 +20,8 @@ class HeaderMenuComponent extends Component {
 
     return (
       <div>
-        <Menu style={{position: 'fixed', zIndex: 9999}} pointing color='violet' inverted fluid>
-          <Responsive as={Dropdown} maxWidth={802} item icon='content' text='Menu  ' >
+        <Menu as='div' style={{position: 'fixed', zIndex: 9999, backgroundColor: '#433b6b'}} pointing inverted fluid>
+          <Responsive as={Dropdown} maxWidth={802} item icon='content' text='Menu &nbsp;' >
             <Dropdown.Menu>
               <Menu.Item
                 as={Link} to='/view'
