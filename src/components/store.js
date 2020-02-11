@@ -21,7 +21,7 @@ class Store {
     {id: 4, eventCreator: this.users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-04-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
     {id: 5, eventCreator: this.users[9].id, placeName: 'Michelin star - Created by Me', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
     {id: 6, eventCreator: this.users[5].id, placeName: 'Michelin star - Created by Someone else', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
-    {id: 7, eventCreator: this.users[9].id, placeName: 'Michelin Red Star', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-11', participants: []},
+    {id: 7, eventCreator: this.users[9].id, placeName: 'Michelin Red Star', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-11', participants: [this.users[0],this.users[1],this.users[2],this.users[3],this.users[4],this.users[5],this.users[6],this.users[7],this.users[8],this.users[9]]},
   ];
 
   menuState = {
@@ -34,8 +34,17 @@ class Store {
 
   addFollower(toFollowID) {
     const idx = this.users.findIndex(user => user.id === toFollowID);
+    if(this.users[idx].followers.find(follower => follower === this.user.id))
+      {
+        return;
+      } else {
+        this.users[idx].followers.push(this.user.id);
+      }
+  }
 
-    this.users[idx].followers.push(this.user);
+  removeFollower(toFollowID) {
+    const idx = this.users.findIndex(user => user.id === toFollowID);
+    this.users[idx].followers = this.users[idx].followers.filter(p => p !== this.user.id);
     console.log(this.users[idx].followers)
   }
 
@@ -117,6 +126,7 @@ class Store {
 
 decorate(Store, {
   user: observable,
+  users: observable,
   events: observable,
   menuState: observable,
   manageUserOnEvent: action,
@@ -125,7 +135,8 @@ decorate(Store, {
   deleteEvent: action,
   getEvents: computed,
   setMenuActiveTab: action,
-  addFollower: action
+  addFollower: action,
+  removeFollower: action,
 });
 
 const store = new Store();

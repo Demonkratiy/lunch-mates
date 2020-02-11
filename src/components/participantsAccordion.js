@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion, List, Label, Segment, Image, Icon, Transition, Modal, Button, Header } from 'semantic-ui-react';
+import { Accordion, List, Label, Segment, Image, Icon, Transition, Modal, Button, Header, Card } from 'semantic-ui-react';
 import store from './store';
 
 export default class ParticipantsAccordion extends React.Component {
@@ -21,7 +21,11 @@ export default class ParticipantsAccordion extends React.Component {
   }
 
   handleFollowModalOpen = (el) => this.setState({ showFollowModal: true, clickedParticipant: el });
-  handleFollowModalClose = () => this.setState({ showFollowModal: false });
+  handleFollowModalClose = (toFollowID) => this.setState({ showFollowModal: false });
+  handleFollowModalUnfollow = (toFollowID) => {
+    store.removeFollower(toFollowID)
+    this.setState({ showFollowModal: false });
+  }
   handleFollowModalFollow = (toFollowID) => {
     store.addFollower(toFollowID);
     this.setState({ showFollowModal: false });
@@ -38,21 +42,35 @@ export default class ParticipantsAccordion extends React.Component {
       <Modal
         open={showFollowModal}
         onClose={this.handleFollowModalClose}
+        basic
+        size='mini'
+        dimmer='blurring'
       >
-        <Header icon='group' content={clickedParticipant.name} />
+        <Header icon='group' content={store.user.id === clickedParticipant.id ? 'Isn\'t this mate is awesome? ;)' : 'Do you want to follow this mate?'} />
           <Modal.Content>
-            <h3>Do you want to follow</h3>
+            <Card>
+            <Image src={clickedParticipant.userPhotoLarge} />
+            <Card.Content>
+              <Card.Header>{clickedParticipant.name}</Card.Header>
+              <Card.Meta>
+                <span>Joined in {clickedParticipant ? clickedParticipant.bio.joined : ''}</span>
+                </Card.Meta>
+                <Card.Description>
+                <span>{clickedParticipant ? clickedParticipant.bio.story : ''}</span>
+                </Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                <Icon name='user' />
+                <span>{clickedParticipant ? clickedParticipant.followers.length : '?'} Followers</span>
+            </Card.Content>
+            </Card>
           </Modal.Content>
+        {store.user.id === clickedParticipant.id ? '' :
         <Modal.Actions>
-            <Button onClick={this.handleFollowModalClose} color='red' inverted animated='fade'>
-              <Button.Content visible><Icon name='times' />No</Button.Content>
-              <Button.Content hidden><Icon name='reply' />No</Button.Content>
-            </Button>
-            <Button color='green' onClick={() => this.handleFollowModalFollow(clickedParticipant.id)} inverted animated>
-              <Button.Content visible><Icon name='checkmark' />Yes</Button.Content>
-              <Button.Content hidden><Icon name='arrow right' />Yes</Button.Content>
-            </Button>
+            <Button onClick={() => this.handleFollowModalUnfollow(clickedParticipant.id)} color='red' inverted icon='times' content='No'/>
+            <Button color='green' onClick={() => this.handleFollowModalFollow(clickedParticipant.id)} inverted icon='checkmark' content='Yes' />
         </Modal.Actions>
+        }
       </Modal>
 
         <Accordion.Title
@@ -68,10 +86,8 @@ export default class ParticipantsAccordion extends React.Component {
                 {participants.length !== 0 ?
                   participants.map((el) => {
                   const {id, ...elProps} = el;
-
                   return(
                     <List.Item key={id} onClick={() => this.handleFollowModalOpen(el)}>
-
                       <Image avatar src={elProps.userPhoto} />
                       <List.Content>
                         <List.Header>{elProps.name}</List.Header>
