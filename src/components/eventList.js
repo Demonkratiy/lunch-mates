@@ -1,21 +1,21 @@
-import React from 'react'
-import EventSingle from './eventSingle'
-import { List,
-         Container } from 'semantic-ui-react'
-import { observer } from 'mobx-react';
-import store from './store';
+import React from "react";
+import { List, Container } from "semantic-ui-react";
+import { observer } from "mobx-react";
 
-class EventListComponent extends React.Component{
+import EventSingle from "./eventSingle";
+import store from "./store";
+
+class EventListComponent extends React.Component {
   render() {
-    const isFuture = this.props.match.path.includes('view')
+    const isFuture = this.props.match.path.includes("view");
     const { futureEvents, historyEvents } = store.getEvents;
     const events = isFuture ? futureEvents : historyEvents;
-    return(
+    return (
       <Container>
         <List>
-          {events.map((item) => {
+          {events.map(item => {
             const { id } = item;
-            return(
+            return (
               <List.Item key={id}>
                 <EventSingle item={item} isFuture={isFuture} />
               </List.Item>
@@ -23,7 +23,7 @@ class EventListComponent extends React.Component{
           })}
         </List>
       </Container>
-    )
+    );
   }
 }
 

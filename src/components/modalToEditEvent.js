@@ -1,8 +1,10 @@
 import React from 'react';
 import { Modal,
-          Button,
-          Header,
-          Icon, Label, Input } from 'semantic-ui-react';
+         Button,
+         Header,
+         Icon,
+         Label,
+         Input } from 'semantic-ui-react';
 import { observer } from 'mobx-react';
 import store from'./store'
 
@@ -95,7 +97,6 @@ class ModalToEditEventComponent extends React.Component {
             <Button.Content visible><Icon name='checkmark' /> Save changes</Button.Content>
             <Button.Content hidden><Icon name='arrow right' />Submit changes</Button.Content>
           </Button>
-
         </Modal.Actions>
       </Modal>
     )

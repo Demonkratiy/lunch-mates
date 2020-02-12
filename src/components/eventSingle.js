@@ -1,5 +1,9 @@
 import React from 'react'
-import { Segment, Button, List, Transition, Responsive } from 'semantic-ui-react'
+import { Segment,
+         Button,
+         List,
+         Transition,
+         Responsive } from 'semantic-ui-react'
 import { observer } from 'mobx-react';
 
 import store from './store';
