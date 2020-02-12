@@ -98,7 +98,7 @@ class EventNewComponent extends React.Component {
                   onFocus={() => this.setState({ dateInputState: "date" })}
                   onBlur={() => this.setState({ dateInputState: "text" })}
                   label="Date"
-                  placeholder="Please select a desired date"
+                  placeholder="Desired lunch date"
                   width={4}
                   name="eventDate"
                   value={eventDate}

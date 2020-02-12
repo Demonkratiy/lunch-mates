@@ -59,7 +59,7 @@ export default class ParticipantsAccordion extends React.Component {
       >
         <Header icon='group' content={store.user.id === clickedParticipant.id ? 'Isn\'t this mate is awesome? ;)' : 'Do you want to follow this mate?'} />
           <Modal.Content>
-            <Card>
+            <Card centered>
               <Image src={clickedParticipant.userPhotoLarge} />
               <Card.Content>
                 <Card.Header>

@@ -15,13 +15,16 @@ class Store {
   user = users[9];
   users = users;
   events = [
-    {id: 1, eventCreator: this.users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', eventDate: '2020-02-28', participants: [this.users[0],this.users[1],this.users[2],this.users[3],this.users[4],this.users[5]]},
+    {id: 1, eventCreator: this.users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', eventDate: '2020-04-28', participants: [this.users[0],this.users[1],this.users[2],this.users[3],this.users[4],this.users[5]]},
     {id: 2, eventCreator: this.users[6].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-01-24', participants: [this.users[6],this.users[7],this.users[1]]},
-    {id: 3, eventCreator: this.users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', eventDate: '2020-02-24', participants: [this.users[1],this.users[5],this.users[6],this.users[8]]},
+    {id: 3, eventCreator: this.users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', eventDate: '2020-01-24', participants: [this.users[1],this.users[5],this.users[6],this.users[8]]},
     {id: 4, eventCreator: this.users[9].id, placeName: 'Krasty Krabs', placeAdress: 'Krabs st, building 5', eventDate: '2020-04-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
     {id: 5, eventCreator: this.users[9].id, placeName: 'Michelin star - Created by Me', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
     {id: 6, eventCreator: this.users[5].id, placeName: 'Michelin star - Created by Someone else', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
     {id: 7, eventCreator: this.users[9].id, placeName: 'Michelin Red Star', placeAdress: 'Krabs st, building 5', eventDate: '2020-02-11', participants: [this.users[0],this.users[1],this.users[2],this.users[3],this.users[4],this.users[5],this.users[6],this.users[7],this.users[8],this.users[9]]},
+    {id: 8, eventCreator: this.users[9].id, placeName: 'Michelin Red Star', placeAdress: 'Krabs st, building 5', eventDate: '2020-04-11', participants: [this.users[0],this.users[1],this.users[2],this.users[3],this.users[4],this.users[5],this.users[6],this.users[7],this.users[8],this.users[9]]},
+    {id: 9, eventCreator: this.users[5].id, placeName: 'Michelin star - Created by user[5]', placeAdress: 'Krabs st, building 5', eventDate: '2020-04-01', participants: [this.users[9],this.users[1],this.users[5],this.users[6]]},
+    {id: 10, eventCreator: this.users[1].id, placeName: 'Lovely Spoon', placeAdress: 'Moon Garden, building 1', eventDate: '2020-06-24', participants: [this.users[1],this.users[5],this.users[6],this.users[8]]},
   ];
 
   menuState = {
