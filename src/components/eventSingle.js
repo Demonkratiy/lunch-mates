@@ -1,5 +1,9 @@
 import React from 'react'
-import { Segment, Button, List, Transition, Responsive } from 'semantic-ui-react'
+import { Segment,
+         Button,
+         List,
+         Transition,
+         Responsive } from 'semantic-ui-react'
 import { observer } from 'mobx-react';
 
 import store from './store';
@@ -68,7 +72,7 @@ class EventSingleComponent extends React.Component {
             {eventCreator === user.id ?
               <Button
                 icon='trash alternate'
-                color='google plus'
+                style={{backgroundColor: '#d55555', color: 'white'}}
                 size='large'
                 onClick={() => {
                   this.deleteEventOnClick(id)

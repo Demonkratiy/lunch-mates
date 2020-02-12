@@ -12,7 +12,7 @@ class LunchEvent {
 }
 
 class Store {
-  user = {id: 88, name: 'Sir Lancelot', userPhoto: 'https://react.semantic-ui.com/images/avatar/small/matthew.png', interestedThemes: ['History','IT','Books','Scince']};
+  user = users[9];
   users = users;
   events = [
     {id: 1, eventCreator: this.users[0].id, placeName: 'Genacvale', placeAdress: 'Kayum Nasiry st. 3', eventDate: '2020-02-28', participants: [this.users[0],this.users[1],this.users[2],this.users[3],this.users[4],this.users[5]]},
