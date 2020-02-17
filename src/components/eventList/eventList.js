@@ -2,8 +2,8 @@ import React from "react";
 import { List, Container } from "semantic-ui-react";
 import { observer } from "mobx-react";
 
-import EventSingle from "./eventSingle";
-import store from "./store";
+import EventSingle from "../eventSingle";
+import store from "../../store";
 
 class EventListComponent extends React.Component {
   render() {

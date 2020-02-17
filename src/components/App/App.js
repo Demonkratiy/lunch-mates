@@ -3,9 +3,9 @@ import { Container } from "semantic-ui-react";
 import { observer } from "mobx-react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-import HeaderMenu from "./menu";
-import EventList from "./eventList";
-import EventNew from "./eventNew";
+import HeaderMenu from "../menu";
+import EventList from "../eventList";
+import EventNew from "../eventNew";
 
 class AppComponent extends Component {
   render() {

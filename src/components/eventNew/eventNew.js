@@ -1,62 +1,80 @@
-import React from 'react';
-import store from './store';
-import { observer } from 'mobx-react';
-import { Link } from 'react-router-dom'
-import {  Form,
-          Segment,
-          Button,
-          Container,
-          Header,
-          Grid,
-          Transition,
-          Icon,
-          Message, } from 'semantic-ui-react';
-
+import React from "react";
+import store from "../../store";
+import { observer } from "mobx-react";
+import { Link } from "react-router-dom";
+import {
+  Form,
+  Segment,
+  Button,
+  Container,
+  Header,
+  Grid,
+  Transition,
+  Icon,
+  Message
+} from "semantic-ui-react";
 
 class EventNewComponent extends React.Component {
   state = {
-    placeName: '',
-    eventDate: '',
-    placeAdress: '',
+    placeName: "",
+    eventDate: "",
+    placeAddress: "",
     placeNameError: false,
     eventDateError: false,
-    placeAdressError: false,
+    placeAddressError: false,
     visible: true,
     success: false,
     newEventCreated: false,
-    dateInputState: 'text',
-  }
+    dateInputState: "text"
+  };
 
-  handleChange = (e, { name, value, error_name }) => this.setState({ [name]: value, [error_name]: false })
+  handleChange = (e, { name, value, error_name }) =>
+    this.setState({ [name]: value, [error_name]: false });
 
-  handleSubmit = (e) => {
-    e.preventDefault();//прерывает отправку формы и следовательно не перезагружает страницу
-    if (this.state.placeName === '' || this.state.eventDate === '' || this.state.placeAdress === '') {
-      if (this.state.placeName === '') {
-        this.setState({ placeNameError: 'Please enter the name of the place' })
+  handleSubmit = e => {
+    e.preventDefault(); //прерывает отправку формы и следовательно не перезагружает страницу
+    if (
+      this.state.placeName === "" ||
+      this.state.eventDate === "" ||
+      this.state.placeAddress === ""
+    ) {
+      if (this.state.placeName === "") {
+        this.setState({ placeNameError: "Please enter the name of the place" });
       }
-      if (this.state.eventDate === '') {
-        this.setState({ eventDateError: 'Please enter the date of this lunch' })
+      if (this.state.eventDate === "") {
+        this.setState({
+          eventDateError: "Please enter the date of this lunch"
+        });
       }
-      if (this.state.placeAdress === '') {
-        this.setState({ placeAdressError: 'Please enter the place adress' })
+      if (this.state.placeAddress === "") {
+        this.setState({ placeAddressError: "Please enter the place Address" });
       }
-      this.setState((prevState) => ({ visible: !prevState.visible }))
+      this.setState(prevState => ({ visible: !prevState.visible }));
     } else {
-      store.addNewEvent(this.state.placeName, this.state.placeAdress, this.state.eventDate);
-      this.setState({ placeName: '', eventDate: '', placeAdress: '', success: true, newEventCreated: true});
-      setTimeout(() => this.setState({success: false}), 4000);
+      store.addNewEvent(
+        this.state.placeName,
+        this.state.placeAddress,
+        this.state.eventDate
+      );
+      this.setState({
+        placeName: "",
+        eventDate: "",
+        placeAddress: "",
+        success: true,
+        newEventCreated: true
+      });
+      setTimeout(() => this.setState({ success: false }), 4000);
     }
-  }
+  };
 
   render() {
     const {
       placeName,
       eventDate,
-      placeAdress,
+      placeAddress,
       placeNameError,
       eventDateError,
-      placeAdressError,
+      placeAddressError,
       visible,
       success,
       newEventCreated,
@@ -106,13 +124,13 @@ class EventNewComponent extends React.Component {
                 />
               </Form.Group>
               <Form.Input
-                error={placeAdressError}
-                error_name="placeAdressError"
-                label="Adress"
-                placeholder="Adress of the place you want to visit"
+                error={placeAddressError}
+                error_name="placeAddressError"
+                label="Address"
+                placeholder="Address of the place you want to visit"
                 width={16}
-                name="placeAdress"
-                value={placeAdress}
+                name="placeAddress"
+                value={placeAddress}
                 onChange={this.handleChange}
               />
               <Grid>
