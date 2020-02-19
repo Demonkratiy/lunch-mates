@@ -63,9 +63,16 @@ class EventNewComponent extends React.Component {
         success: true,
         newEventCreated: true
       });
-      setTimeout(() => this.setState({ success: false }), 4000);
+      this.notificationTimeout = setTimeout(
+        () => this.setState({ success: false }),
+        4000
+      );
     }
   };
+
+  componentWillUnmount() {
+    clearTimeout(this.notificationTimeout);
+  }
 
   render() {
     const {
