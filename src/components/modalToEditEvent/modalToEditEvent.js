@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Modal,
-  Button,
-  Header,
-  Icon,
-  Label,
-  Input,
-  Form
-} from "semantic-ui-react";
+import { Modal, Button, Header, Icon, Label, Form } from "semantic-ui-react";
 import { observer } from "mobx-react";
 import store from "../../store";
 
