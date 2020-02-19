@@ -66,6 +66,7 @@ class ModalToEditEventComponent extends React.Component {
       <Modal
         trigger={
           <Label
+            style={{ left: "-30px" }}
             as="a"
             color="teal"
             ribbon
