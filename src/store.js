@@ -20,7 +20,7 @@ class Store {
       eventCreator: this.users[0].id,
       placeName: "Genacvale",
       placeAddress: "Kayum Nasiry st. 3",
-      eventDate: "2020-04-28",
+      eventDate: "2124-04-28",
       participants: [
         this.users[0],
         this.users[1],
@@ -35,7 +35,7 @@ class Store {
       eventCreator: this.users[6].id,
       placeName: "Krasty Krabs",
       placeAddress: "Krabs st, building 5",
-      eventDate: "2020-01-24",
+      eventDate: "2120-01-24",
       participants: [this.users[6], this.users[7], this.users[1]]
     },
     {
@@ -43,7 +43,7 @@ class Store {
       eventCreator: this.users[1].id,
       placeName: "Lovely Spoon",
       placeAddress: "Moon Garden, building 1",
-      eventDate: "2020-01-24",
+      eventDate: "2120-01-24",
       participants: [this.users[1], this.users[5], this.users[6], this.users[8]]
     },
     {
@@ -51,7 +51,7 @@ class Store {
       eventCreator: this.users[9].id,
       placeName: "Krasty Krabs",
       placeAddress: "Krabs st, building 5",
-      eventDate: "2020-04-01",
+      eventDate: "2120-04-01",
       participants: [this.users[9], this.users[1], this.users[5], this.users[6]]
     },
     {
@@ -59,7 +59,7 @@ class Store {
       eventCreator: this.users[9].id,
       placeName: "Michelin star - Created by Me",
       placeAddress: "Krabs st, building 5",
-      eventDate: "2020-02-01",
+      eventDate: "2120-02-01",
       participants: [this.users[9], this.users[1], this.users[5], this.users[6]]
     },
     {
@@ -67,7 +67,7 @@ class Store {
       eventCreator: this.users[5].id,
       placeName: "Michelin star - Created by Someone else",
       placeAddress: "Krabs st, building 5",
-      eventDate: "2020-02-01",
+      eventDate: "2120-02-01",
       participants: [this.users[9], this.users[1], this.users[5], this.users[6]]
     },
     {
@@ -75,7 +75,7 @@ class Store {
       eventCreator: this.users[9].id,
       placeName: "Michelin Red Star",
       placeAddress: "Krabs st, building 5",
-      eventDate: "2020-02-11",
+      eventDate: "2120-02-11",
       participants: [
         this.users[0],
         this.users[1],
@@ -94,7 +94,7 @@ class Store {
       eventCreator: this.users[9].id,
       placeName: "Michelin Red Star",
       placeAddress: "Krabs st, building 5",
-      eventDate: "2020-04-11",
+      eventDate: "2120-04-11",
       participants: [
         this.users[0],
         this.users[1],
@@ -113,7 +113,7 @@ class Store {
       eventCreator: this.users[5].id,
       placeName: "Michelin star - Created by user[5]",
       placeAddress: "Krabs st, building 5",
-      eventDate: "2020-04-01",
+      eventDate: "2120-04-01",
       participants: [this.users[9], this.users[1], this.users[5], this.users[6]]
     },
     {
@@ -121,7 +121,7 @@ class Store {
       eventCreator: this.users[1].id,
       placeName: "Lovely Spoon",
       placeAddress: "Moon Garden, building 1",
-      eventDate: "2020-06-24",
+      eventDate: "2120-06-24",
       participants: [this.users[1], this.users[5], this.users[6], this.users[8]]
     }
   ];
