@@ -75,7 +75,7 @@ class Store {
       eventCreator: this.users[9].id,
       placeName: "Michelin Red Star",
       placeAddress: "Krabs st, building 5",
-      eventDate: "2120-02-11",
+      eventDate: "2020-02-11",
       participants: [
         this.users[0],
         this.users[1],
@@ -111,9 +111,9 @@ class Store {
     {
       id: 9,
       eventCreator: this.users[5].id,
-      placeName: "Michelin star - Created by user[5]",
+      placeName: `Michelin star - Created by ${this.users[5].name}`,
       placeAddress: "Krabs st, building 5",
-      eventDate: "2120-04-01",
+      eventDate: "2020-04-01",
       participants: [this.users[9], this.users[1], this.users[5], this.users[6]]
     },
     {
